@@ -1,39 +1,37 @@
-# AdBlock Shield Pro — Official Public Release (`V2.0.1`)
+# AdBlock Shield Pro — Official Public Release (`V2.0.2`)
 
 <p align="center">
   <img src="app_logo.png" alt="AdBlock Shield Pro Logo" width="140" />
 </p>
 
 <p align="center">
-  <b>System-Wide Android Ad, Tracker & YouTube Blocker Powered by Brave Shields Technology</b><br/>
+  <b>Background System-Wide Android Ad, Tracker, Popunder & YouTube Blocker Powered by Brave Shields Technology</b><br/>
   Compatible with <b>Android 8.0 (Oreo, API 26) through Android 16+</b> • Developed by <a href="https://ayanpaul.me"><b>Ayan Paul</b></a>
 </p>
 
 ---
 
-## Direct APK Download (`V2.0.1`)
+## Direct APK Download (`V2.0.2`)
 
 | Package | Version | Build Code | Download Link |
 | :--- | :--- | :--- | :--- |
-| **AdBlock Shield Pro (Latest Release APK)** | `V2.0.1` | `201` | [**Download `AdBlock-Shield.apk`**](https://raw.githubusercontent.com/Ayan-Paul-2001/Adblock-Shield-Public-Release/main/AdBlock-Shield.apk) |
-| **OTA Auto-Update Version Manifest** | `V2.0.1` | `201` | [`version.json`](./version.json) |
+| **AdBlock Shield Pro (Latest Release APK)** | `V2.0.2` | `202` | [**Download `AdBlock-Shield.apk`**](https://raw.githubusercontent.com/Ayan-Paul-2001/Adblock-Shield-Public-Release/main/AdBlock-Shield.apk) |
+| **OTA Auto-Update Version Manifest** | `V2.0.2` | `202` | [`version.json`](./version.json) |
 
 ---
 
-## What's New in `V2.0.1`
+## What's New in `V2.0.2`
 
-1. **Brave Browser Shields Engine (`v156.1.98.63` Parity)**:
-   - **Dual-Stack IPv4 + IPv6 System DNS Sinkhole**: Routes both IPv4 (`10.111.222.1/24`) and IPv6 (`fd00:1:fd00:1:fd00:1:fd00:1/128`) DNS traffic—including Chrome's built-in `AsyncDns` resolvers (`8.8.8.8`, `1.1.1.1`, `9.9.9.9`, `2001:4860:4860::8888`, `2606:4700:4700::1111`)—through the on-device sinkhole.
-   - **Anti-DoH Canary & `HTTPS`/`SVCB` (QTYPE 65/64) Blocking**: Prevents browsers and apps from silently upgrading to encrypted DNS-over-HTTPS (`use-application-dns.net`, `dns.google`, `cloudflare-dns.com`, `one.one.one.one`) to bypass ad filtering.
-   - **Brave CNAME-Uncloaking Engine**: Inspects DNS `CNAME` chains in real time before delivering responses, blocking disguised first-party subdomains that resolve to third-party trackers (`*.omtrdc.net`, `*.2o7.net`, `*.adobedc.net`, `*.dnsdelegation.io`, `*.eulerian.net`, `*.dataunlocker.com`, `*.stape.io`, `*.tracedock.com`, `*.intentiq.com`).
-   - **Brave `CleanUrlsEngine` & `DebounceEngine`**: Strips tracking parameters (`utm_*`, `gclid`, `fbclid`, `msclkid`, `ttclid`, `twclid`, `mc_eid`, `igshid`, YouTube `si`) and unwraps bounce-tracking redirects and Google AMP wrappers (`/amp/s/*`).
-   - **Brave `resources.json` Surrogate Scripts**: Serves full-fidelity mocks for `adsbygoogle.js`, `gpt.js`, `ima3.js`, `/instream/ad_status.js`, `scorecardresearch.com/beacon.js`, and VAST/VMAP XML payloads so websites and video players never break or trigger anti-adblock walls.
-2. **Official YouTube App Background Ad-Blocker & Skipper**:
+1. **Pure Background System-Wide Brave Engine (`186,000+` Bundled Domain Rules)**:
+   - Works strictly in the background across all installed Android apps, games, external browsers (`Chrome`, `Opera`, `UC Browser`, `Phoenix`, `Firefox`, `Samsung Internet`), and the official YouTube app—no in-app WebView/browser required.
+   - **4G/5G Carrier & Wi-Fi Router DNS Interception**: Dynamically discovers and routes active 4G/5G SIM carrier DNS servers, Wi-Fi router gateways, and hardcoded public DNS resolvers (`8.8.8.8`, `1.1.1.1`, `9.9.9.9`, `208.67.222.222`) into the local TUN sinkhole so no external browser or app can bypass filtering on mobile data.
+   - **Popunder, Betting & Casino Redirect Blocker**: Blocks rotating numbered popunder/casino/betting domains (`krikya11.live`, `krikya*`, `1xbet*`, `melbet*`, `mostbet*`, `baji*`, `jeetbuzz*`, `crickex*`, `babu88*`, `nagad88*`, `adsterra*`, `propellerads*`, `onclkds*`, `realsrv*`, `tsyndicate*`) at both the DNS layer and browser window layer.
+   - **Anti-DoH Canary & `HTTPS`/`SVCB` (QTYPE 65/64) Blocking**: Prevents browsers and apps from silently upgrading to encrypted DNS-over-HTTPS (`use-application-dns.net`, `dns.google`, `cloudflare-dns.com`, `doh.opera.com`, `ucdns.ucweb.com`) to bypass ad filtering.
+   - **Brave CNAME-Uncloaking Engine**: Inspects DNS `CNAME` chains in real time before delivering responses, blocking disguised first-party subdomains that resolve to third-party trackers.
+2. **Official YouTube App Background Ad-Blocker & Skipper (`YouTubeAppAdSkipperService`)**:
    - Runs in the background while you watch videos in the official YouTube Android app (`com.google.android.youtube`) or YouTube Music (`com.google.android.apps.youtube.music`).
-   - Automatically detects and clicks YouTube's native **Skip Ad** buttons (`skip_ad_button`, `modern_skip_ad_button`, `skip_ad_button_container`) within `80ms`.
-   - Automatically mutes device media audio during unskippable ad segments (`ad_progress_text`, `ad_badge`, `ad_attribution`) and restores volume the instant your video resumes.
-3. **Brave YouTube `sabr=1` Protobuf Backoff Patch (`brave-yt-sabr-fix.js`)**:
-   - Zeroes out `backoffTimeMs` (protobuf varint tag `0x20`) in `*.googlevideo.com/videoplayback` (`sabr=1`) binary responses, rewrites `"adPlacements"` and `"adSlots"` in `/youtubei/v1/player` and `/youtubei/v1/next` payloads, splices out YouTube Shorts ads, and enables background audio playback (`brave-video-bg-play-update.js`).
+   - Automatically detects and clicks YouTube's native **Skip Ad** buttons (`skip_ad_button`, `modern_skip_ad_button`, `skip_ad_button_container`, and Litho `ComponentHost` buttons) using both `ACTION_CLICK` and coordinate-level `dispatchGesture` taps within `50ms`.
+   - Automatically mutes device media audio during unskippable ad segments (`ad_progress_text`, `ad_badge`, `ad_attribution`, `"Sponsored"`) and restores volume the instant your video resumes.
 4. **Silent Over-The-Air (OTA) Auto-Update System**:
    - Automatically checks for new app releases in the background, sends a system Android notification when a newer version is published, and installs the new APK in one tap via `FileProvider`.
 
