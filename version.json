@@ -1,0 +1,7 @@
+{
+  "versionCode": 201,
+  "versionName": "2.0.1",
+  "apkUrl": "https://raw.githubusercontent.com/Ayan-Paul-2001/Adblock-Shield-Public-Release/main/AdBlock-Shield.apk",
+  "changelog": "V2.0.1: Integrated Brave Shields Engine (CleanURLs, Debounce, CNAME Uncloaking, SABR Protobuf Fix), Dual-Stack IPv4/IPv6 DNS Sinkhole, and Official YouTube App Background Ad-Skipper."
+}
+
